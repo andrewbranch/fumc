@@ -22,7 +22,7 @@ module.exports = function(app) {
   bulletinsRouter.get('/', function(req, res) {
     res.send({
       "links": {
-        "self":"/api/v2/bulletins"
+        "self":"/api/v3/bulletins"
       },
       "data": [{"id":18,"date":"2015-04-05T07:00:00.000Z","service":"Traditional services","visible":true,"file":"04-05-15_bulletin.pdf","type":"bulletins","links":{"self":"/api/bulletins/18"}},{"id":17,"date":"2015-04-05T07:00:00.000Z","service":"ICON","visible":true,"file":"Easter_ICON.pdf","type":"bulletins","links":{"self":"/api/bulletins/17"}}]
     });
@@ -41,5 +41,5 @@ module.exports = function(app) {
     res.status(204).end();
   });
 
-  app.use('/api/v2/bulletins', bulletinsRouter);
+  app.use('/api/v3/bulletins', bulletinsRouter);
 };

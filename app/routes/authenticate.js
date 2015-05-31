@@ -4,7 +4,7 @@ export default Ember.Route.extend({
   beforeModel: function (transition) {
     var token = transition.queryParams.access_token;
     if (token) {
-      Ember.$.post('/api/v2/authenticate', { access_token: token }).then(function (response) {
+      Ember.$.post('/api/v3/authenticate', { access_token: token }).then(function (response) {
         if (response.success) {
 
           var loginController = this.controllerFor('login'),
