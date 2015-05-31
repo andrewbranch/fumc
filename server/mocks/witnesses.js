@@ -14,7 +14,7 @@ module.exports = function(app) {
           "file": null,
           "id": ++id,
           "type": "bulletins",
-          "links": {"self":"/api/bulletins/" + id }
+          "links": {"self":"/api/v2/bulletins/" + id }
         }
     };
   }
@@ -22,7 +22,7 @@ module.exports = function(app) {
   witnessesRouter.get('/', function(req, res) {
     res.send({
       "links": {
-        "self": "/api/witnesses",
+        "self": "/api/v2/witnesses",
       },
       "data": [{"id":12,"from":"2015-03-29T07:00:00.000Z","to":"2015-04-11T07:00:00.000Z","volume":195,"issue":7,"visible":true,"file":"03-29-15_Witness.pdf"}]
     });
@@ -40,5 +40,5 @@ module.exports = function(app) {
     res.status(204).end();
   });
 
-  app.use('/api/witnesses', witnessesRouter);
+  app.use('/api/v2/witnesses', witnessesRouter);
 };

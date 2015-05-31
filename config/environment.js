@@ -5,7 +5,7 @@ module.exports = function (environment) {
     modulePrefix: 'mission-control',
     environment: environment,
     baseURL: '/',
-    locationType: 'auto',
+    locationType: 'hash',
 
     contentSecurityPolicy: {
       'default-src': "'none'",
