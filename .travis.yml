@@ -19,7 +19,7 @@ install:
 script:
   - npm test
   
-before_deployment:
+before_deploy:
   - "ember build --environment production"
 
 deploy:
