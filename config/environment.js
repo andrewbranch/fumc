@@ -2,7 +2,7 @@
 
 module.exports = function (environment) {
   var ENV = {
-    modulePrefix: 'fumc',
+    modulePrefix: 'mission-control',
     environment: environment,
     baseURL: '/',
     locationType: 'hash',
@@ -41,7 +41,7 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.APP.proxy = 'http://localhost:8080';
+    ENV.APP.proxy = 'http://localhost:3000';
     ENV.contentSecurityPolicy['connect-src'] += (' ' + ENV.APP.proxy);
   }
 
