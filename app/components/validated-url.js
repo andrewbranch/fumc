@@ -17,7 +17,7 @@ export default Ember.Component.extend({
         return;
       }
 
-      Ember.$.get(config.APP.proxy + '/api/url/test', {
+      Ember.$.get(config.host + '/' + config.namespace + '/url/test', {
         url: url
       }).done(function (response) {
         self.set('isValid', response.found);

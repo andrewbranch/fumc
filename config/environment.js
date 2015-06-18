@@ -6,13 +6,16 @@ module.exports = function (environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'hash',
+    proxy: '',
+    host: 'http://api.fumcpensacola.com',
+    namespace: 'v3',
 
     contentSecurityPolicy: {
       'default-src': "'none'",
       'frame-src': "https://api-cdn.amazon.com",
       'script-src': "'self' 'unsafe-inline' https://api-cdn.amazon.com use.typekit.net",
       'font-src': "'self' data: use.typekit.net https://fonts.gstatic.com",
-      'connect-src': "'self' https://sts.amazonaws.com https://fumcappfiles.s3.amazonaws.com",
+      'connect-src': "'self' https://sts.amazonaws.com https://fumcappfiles.s3.amazonaws.com api.fumcpensacola.com",
       'img-src': "'self' data: p.typekit.net about: https://fumcappfiles.s3.amazonaws.com",
       'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com use.typekit.net",
       'media-src': "'self' https://fumcappfiles.s3.amazonaws.com",
@@ -31,7 +34,6 @@ module.exports = function (environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      proxy: ''
     }
   };
 
@@ -41,8 +43,9 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.APP.proxy = 'http://localhost:3000';
-    ENV.contentSecurityPolicy['connect-src'] += (' ' + ENV.APP.proxy);
+    ENV.proxy = 'http://localhost:3000';
+    ENV.host = ENV.proxy;
+    ENV.contentSecurityPolicy['connect-src'] += (' ' + ENV.proxy);
   }
 
   if (environment === 'test') {

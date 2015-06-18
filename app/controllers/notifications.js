@@ -37,7 +37,7 @@ export default Ember.ObjectController.extend({
         var model = this.get('model');
         model.save().then(function () {
           Ember.$.ajax({
-            url: config.APP.proxy + (test === true ? '/api/v3/notify/testers' : '/api/v3/notify/everyone'),
+            url: config.host + '/' + config.namespace + (test === true ? '/notify/testers' : '/notify/everyone'),
             type: 'POST',
             contentType: 'application/json; charset=utf8',
             data: JSON.stringify({

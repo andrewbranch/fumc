@@ -1,11 +1,12 @@
 /* global Cookies */
 
 import JsonApiAdapter from 'ember-json-api/json-api-adapter';
+import config from '../config/environment';
 
 export default JsonApiAdapter.extend({
   
-  host: 'http://api.fumcpensacola.com',
-  namespace: 'api/v3',
+  host: config.host,
+  namespace: config.namespace,
 
   headers: function () {
     return {
