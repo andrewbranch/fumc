@@ -3,7 +3,7 @@
 <button id="new-bulletin" class="ui blue button" {{action "newBulletin"}}>New Bulletin</button>
 
 <div class="ui selection link divided list">
-	{{#each bulletin in arrangedContent itemController="bulletin"}}
+	{{#each model as |bulletin|}}
 		{{view "bulletin"}}
 	{{/each}}
 </div>

@@ -22,7 +22,11 @@
     <div class="sixteen wide column">
       <form class="ui fluid form">
         <div class="field">
-          {{file-upload oldFile=bulletin.file change="fileSelected"}}
+          {{file-upload
+            initialFilename=bulletin.file
+            picked=(action "fileSelectedOnBulletin" bulletin "file")
+            uploaded=(action "fileUploadedOnBulletin" bulletin "file")
+          }}
         </div>
         <div class="two fields">
           <div class="field">

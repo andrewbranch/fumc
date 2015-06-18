@@ -1,4 +1,8 @@
+/* global moment */
+
 import DS from 'ember-data';
+import Ember from 'ember';
+const { Promise } = Ember.RSVP;
 
 export default DS.Model.extend({
   date: DS.attr('date'),
@@ -13,5 +17,12 @@ export default DS.Model.extend({
     get() {
       return config.host + '/' + config.namespace + '/' + this.get('file');
     }
+  }),
+  
+  formattedDate: Ember.computed('date', {
+    get() {
+      moment(this.get('date')).format('MMMM D, YYYY');
+    }
   })
+  
 });

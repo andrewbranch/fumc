@@ -1,43 +1,64 @@
 import Ember from 'ember';
 import config from '../config/environment';
-var TEST = config.environment === 'test';
+import AWS from '../utils/aws';
+const TEST = config.environment === 'test';
 
 export default Ember.Component.extend({
 
-  oldFile: null,
-  currentFile: null,
-  input: null,
-
-
   didInsertElement: function () {
-    var component = this,
-        input = component.get('element').querySelector('input[type=file]');
-
-    if (!this.get('currentFile')) {
-      component.set('currentFile', this.get('oldFile'));
-    }
+    let input = component.get('element').querySelector('input[type=file]');
     
-    var change = function (event) {
-      var file = TEST ? event.detail.file : this.files[0];
-      component.set('currentFile', file.name);
-      component.sendAction('change', file);
+    let change = event => {
+      let file = TEST ? event.detail.file : event.target.files[0];
+      this.set('file', file);
+      this.set('needsUpload', true);
+      this.sendAction('picked');
     };
 
     input.addEventListener('change', change, false);
     if (TEST) {
       input.addEventListener('test.file', change, false);
     }
-
+    
     this.set('input', input);
   },
 
   actions: {
     replace: function () {
-      this.set('currentFile', null);
-      this.sendAction('change', null);
+      this.set('file', null);
+      this.set('needsUpload', false);
+      this.sendAction('removed');
     },
+    
     triggerClick: function () {
       this.get('input').click();
+    },
+    
+    upload: function() {
+      if (this.get('isUploading')) {
+        return false;
+      }
+      
+      let file = this.get('file'),
+          key = file.name.replace(/(\..+?)$/, '_' + Date.now() + '$1');
+      this.set('isUploading', true);
+      AWS.s3.putObject({
+        Key: key,
+        ContentType: file.type,
+        CacheControl: 'max-age=31536000',
+        Body: file
+      }, (err, data) => {
+        this.set('isUploading', false);
+        if (err) {
+          return this.sendAction('failed', err);
+        }
+        
+        this.set('needsUpload', false);
+        this.set('initialFilename', key);
+        this.sendAction('uploaded', file);
+      }).on('httpUploadProgress', progress => {
+        this.set('progress', progress.loaded / progress.total * 100);
+      });
     }
   }
 });
