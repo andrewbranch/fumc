@@ -7,5 +7,11 @@ export default DS.Model.extend({
   liturgicalDay: DS.attr('string'),
   visible: DS.attr('boolean'),
   file: DS.attr('string'),
-  screenshot: DS.attr('string')
+  screenshot: DS.attr('string'),
+  
+  fileURL: Ember.computed('file', {
+    get() {
+      return config.host + '/' + config.namespace + '/' + this.get('file');
+    }
+  })
 });

@@ -4,10 +4,6 @@ import Ember from 'ember';
 import PDFSController from './pdfs';
 
 export default PDFSController.extend({
-	
-	needs: ['pdfs'],
-	modalURL: Ember.computed.alias('controllers.pdfs.modalURL'),
-	showingModal: Ember.computed.alias('controllers.pdfs.showingModal'),
 
 	actions: {
 

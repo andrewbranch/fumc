@@ -1,21 +1,17 @@
 import Ember from 'ember';
 import AWS from '../utils/aws';
 import FileUpload from '../models/file-upload';
+import config from '../config/environment';
 
 export default Ember.ObjectController.extend({
   
   editing: false,
   needs: ['pdfs'],
-  modalURL: Ember.computed.alias('controllers.pdfs.modalURL'),
   
   actions: {
     
     toggleEditing: function () {
       this.toggleProperty('editing');
-    },
-    
-    viewPDF: function () {
-      this.set('modalURL', '/api/file/' +  this.get('file'));
     },
     
     cancel: function () {

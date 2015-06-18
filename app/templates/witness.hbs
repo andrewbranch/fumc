@@ -13,7 +13,7 @@
     </div>
     <div class="four wide right column">
       {{#if witness.file}}
-        <button class="ui small black button" {{action "viewPDF" bubbles=false}}>View</button>
+        <a href="{{witness.fileURL}}" class="ui small black button" target="_blank">View</a>
       {{/if}}
       <button class="ui small red button" {{action "remove" bubbles=false}}>Delete</button>
     </div>

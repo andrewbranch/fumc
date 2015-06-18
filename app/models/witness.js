@@ -1,4 +1,6 @@
+import Ember from 'ember';
 import DS from 'ember-data';
+import config from '../config/environment';
 
 export default DS.Model.extend({
   from: DS.attr('date'),
@@ -8,5 +10,11 @@ export default DS.Model.extend({
   issue: DS.attr('number'),
   visible: DS.attr('boolean'),
   file: DS.attr('string'),
-  screenshot: DS.attr('string')
+  screenshot: DS.attr('string'),
+  
+  fileURL: Ember.computed('file', {
+    get() {
+      return config.host + '/' + config.namespace + '/' + this.get('file');
+    }
+  })
 });

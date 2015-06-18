@@ -1,8 +1,6 @@
 /* global require, module */
 
-var EmberApp = require('ember-cli/lib/broccoli/ember-app'),
-    pickFiles = require('broccoli-static-compiler'),
-    mergeTrees = require('broccoli-merge-trees');
+var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp({
   vendorFiles: {
@@ -29,13 +27,5 @@ app.import('bower_components/moment/min/moment.min.js');
 app.import('bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js');
 app.import('bower_components/pikaday/pikaday.js');
 app.import('bower_components/pikaday/css/pikaday.css');
-app.import('bower_components/semantic-ui/dist/semantic.min.js');
-app.import('bower_components/semantic-ui/dist/semantic.min.css');
 
-var fontTree = pickFiles('bower_components/semantic-ui/dist/themes/default/assets/fonts', {
-  srcDir: '/',
-  files: ['*'],
-  destDir: '/assets/themes/default/assets/fonts'
-});
-
-module.exports = mergeTrees([app.toTree(), fontTree]);
+module.exports = app.toTree();
