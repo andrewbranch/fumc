@@ -1,6 +1,6 @@
 {
   "name": "mission-control",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Frontend interface to API and app-related tasks.",
   "engines": {
     "iojs": "^2.1.0",
