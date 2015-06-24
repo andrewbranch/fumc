@@ -24,8 +24,8 @@
         <div class="field">
           {{file-upload
             initialFilename=bulletin.file
-            picked=(action "fileSelectedOnBulletin" bulletin "file")
-            uploaded=(action "fileUploadedOnBulletin" bulletin "file")
+            on-picked=(action "fileSelectedForBulletin" bulletin "file")
+            on-uploaded=(action "fileUploadedForBulletin" bulletin "file")
           }}
         </div>
         <div class="two fields">

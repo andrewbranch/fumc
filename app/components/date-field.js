@@ -7,7 +7,7 @@ export default Ember.TextField.extend({
 
   updateValue: function () {
     var date = moment(this.get('date'));
-    if (date.isValid() && !this.$().is(':focus')) {
+    if (this.element && date.isValid() && !this.$().is(':focus')) {
       this.set('value', date.format('L'));
       this.get('picker').setDate(date.format('L'));
     }

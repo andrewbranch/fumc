@@ -6,7 +6,7 @@ const TEST = config.environment === 'test';
 export default Ember.Component.extend({
 
   didInsertElement: function () {
-    let input = component.get('element').querySelector('input[type=file]');
+    let input = this.get('element').querySelector('input[type=file]');
     
     let change = event => {
       let file = TEST ? event.detail.file : event.target.files[0];
@@ -27,7 +27,7 @@ export default Ember.Component.extend({
     replace: function () {
       this.set('file', null);
       this.set('needsUpload', false);
-      this.sendAction('removed');
+      this.attrs['on-removed']();
     },
     
     triggerClick: function () {
@@ -50,12 +50,12 @@ export default Ember.Component.extend({
       }, (err, data) => {
         this.set('isUploading', false);
         if (err) {
-          return this.sendAction('failed', err);
+          return this.attrs['on-failed']('failed', err);
         }
         
         this.set('needsUpload', false);
         this.set('initialFilename', key);
-        this.sendAction('uploaded', file);
+        this.attrs['on-uploaded']('uploaded', file);
       }).on('httpUploadProgress', progress => {
         this.set('progress', progress.loaded / progress.total * 100);
       });

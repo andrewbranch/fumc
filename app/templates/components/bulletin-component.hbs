@@ -1,0 +1,13 @@
+{{#paper-card}}
+  {{#if editing}}
+    
+  {{else}}
+    {{#if model.screenshot}}
+      <img src="{{model.screenshotURL}}" alt="">
+    {{else}}
+
+    {{/if}}
+    <h3>{{model.formattedDate}}</h3>
+    <p><i>{{model.liturgicalDay}}</i> {{model.lectionary}}</p>
+  {{/if}}
+{{/paper-card}}

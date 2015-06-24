@@ -1,10 +1,21 @@
-<h1 class="ui header">Bulletins</h1>
+{{#paper-toolbar}}
+  <h2 class="md-toolbar-tools">
+    {{#paper-sidenav-toggle class="menu-sidenav-toggle"}}
+      {{paper-icon icon="menu"}}
+    {{/paper-sidenav-toggle}}
+    <span>Index</span>
+  </h2>
+{{/paper-toolbar}}
 
-<button id="new-bulletin" class="ui blue button" {{action "newBulletin"}}>New Bulletin</button>
+{{#paper-content}}
+	<div class="container">
+		{{#paper-button raised=true classNames="md-primary" id="new-bulletin" action="newBulletin"}}New Bulletin{{/paper-button}}
 
-<div class="ui selection link divided list">
-	{{#each model as |bulletin|}}
-		{{view "bulletin"}}
-	{{/each}}
-</div>
+		<div class="space-above cards">
+			{{#each model key="@guid" as |bulletin|}}
+				{{bulletin model=bulletin}}
+			{{/each}}
+		</div>
+	</div>
+{{/paper-content}}
 
