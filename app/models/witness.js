@@ -10,7 +10,7 @@ export default DS.Model.extend({
   issue: DS.attr('number'),
   visible: DS.attr('boolean'),
   file: DS.attr('string'),
-  screenshot: DS.attr('string'),
+  preview: DS.attr('string'),
   
   fileURL: Ember.computed('file', {
     get() {

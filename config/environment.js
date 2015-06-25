@@ -46,6 +46,7 @@ module.exports = function (environment) {
     ENV.proxy = 'http://localhost:3000';
     ENV.host = ENV.proxy;
     ENV.contentSecurityPolicy['connect-src'] += (' ' + ENV.proxy);
+    ENV.contentSecurityPolicy['img-src'] += (' ' + ENV.proxy);
   }
 
   if (environment === 'test') {

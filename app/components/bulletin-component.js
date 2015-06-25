@@ -36,7 +36,7 @@ export default Ember.Component.extend({
         model.destroyRecord();
       } else {
         model.rollback();
-        model.set('editing', false);
+        this.set('editing', false);
       }
     },
     save: function() {
@@ -51,17 +51,27 @@ export default Ember.Component.extend({
       this.set(property, key);
       this.decrementProperty('numberOfFileUploading');
     },
-    fileSelected: function(property, file) {
-      if (!file) {
-        this.set(property, null);
-      }
-    },
     fileUploadStarted: function() {
       this.incrementProperty('numberOfFileUploading');
     },
     fileSelected: function(property, file) {
       let model = this.get('model');
-      if (property === 'file') {
+      if (!file) {
+        return this.set(property, null);
+        if (property === 'preview') {
+          this.set('previewPreview', null);
+        }
+      }
+      
+      if (property === 'model.preview') {
+        if (file.type.startsWith('image')) {
+          let reader = new FileReader();
+          reader.onload = e => {
+            this.set('previewPreview', e.target.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      } else if (property === 'model.file') {
         // Make some semi-intelligent guesses
         // about how the filename might look
         // so we can try to parse out the date

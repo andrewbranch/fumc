@@ -2,8 +2,7 @@
 
 import DS from 'ember-data';
 import Ember from 'ember';
-import config from '../config/environment';
-const { Promise } = Ember.RSVP;
+import fileAPI from '../utils/file-api';
 
 export default DS.Model.extend({
   date: DS.attr('date'),
@@ -12,13 +11,10 @@ export default DS.Model.extend({
   liturgicalDay: DS.attr('string'),
   visible: DS.attr('boolean'),
   file: DS.attr('string'),
-  screenshot: DS.attr('string'),
+  preview: DS.attr('string'),
   
-  fileURL: Ember.computed('file', {
-    get() {
-      return config.host + '/' + config.namespace + '/file/' + this.get('file');
-    }
-  }),
+  fileURL: fileAPI('file'),
+  previewURL: fileAPI('preview'),
   
   formattedDate: Ember.computed('date', {
     get() {

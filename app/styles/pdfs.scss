@@ -17,6 +17,11 @@
   &:not(.editing) .editor {
     display: none;
   }
+  
+  .preview-image.placeholder {
+    color: #777;
+    text-align: center;
+  }
 }
 
 .ui.buttons .or::before {
