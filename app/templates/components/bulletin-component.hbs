@@ -1,13 +1,67 @@
-{{#paper-card}}
-  {{#if editing}}
-    
-  {{else}}
-    {{#if model.screenshot}}
-      <img src="{{model.screenshotURL}}" alt="">
-    {{else}}
+<div class="ui grid">
+  <div class="row">
+    <div class="one wide column">
+      {{#if model.visible}}
+        <i class="unhide icon"></i>
+      {{/if}}
+    </div>
+    <div class="ten wide column">
+      <div class="header">{{model.formattedDate}}</div>
+      {{model.service}}
+    </div>
+    <div class="five wide right column">
+      <button class="ui small blue button" {{action "toggleEditing"}}>Edit</button>
+      {{#if model.file}}
+        <a href="{{model.fileURL}}" class="ui small black button" target="_blank">View</a>
+      {{/if}}
+      <button class="ui small red button" {{action 'remove' bubbles=false}}>Delete</button>
+    </div>
+  </div>
 
-    {{/if}}
-    <h3>{{model.formattedDate}}</h3>
-    <p><i>{{model.liturgicalDay}}</i> {{model.lectionary}}</p>
-  {{/if}}
-{{/paper-card}}
+  <div class="row slide editor">
+    <div class="sixteen wide column">
+      <form class="ui fluid form">
+        <div class="field">
+          {{file-upload
+            initialFilename=model.file
+            on-picked=(action "fileSelected" "model.file")
+            on-uploading=(action "fileUploadStarted")
+            on-uploaded=(action "fileUploaded" "model.file")
+            on-selected=(action "fileSelected" "model.file")
+          }}
+        </div>
+        <div class="two fields">
+          <div class="field">
+            <label>Service</label>
+            <div class="ui left labeled input">
+              {{input class="service" value=model.service placeholder="e.g. ICON"}}
+              {{#if model.errors.service}}
+                <div class="ui red pointing above label">{{model.errors.service}}</div>
+              {{/if}}
+            </div>
+          </div>
+          <div class="date field">
+            <label>Service Date</label>
+            <div class="ui left labeled input">
+              {{date-field date=model.date}}
+              {{#if model.errors.date}}
+                <div class="ui red pointing above label">{{model.errors.date}}</div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui checkbox">
+            {{input type="checkbox" checked=model.visible}}
+            <label>Publish to app/website</label>
+          </div>
+        </div>
+        <div class="ui buttons field">
+          <button type="button" class="ui button" {{action "cancelEditing"}}>Cancel</button>
+          <div class="or"></div>
+          <button class="save ui blue button {{unless shouldSave 'disabled'}}" {{action "save"}}>Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

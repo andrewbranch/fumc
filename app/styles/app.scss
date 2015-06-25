@@ -1,14 +1,14 @@
 @import './pdfs.scss';
 @import './featured.scss';
 @import './calendars.scss';
-@import 'ember-paper';
-@import 'template';
 
 $font-stack: 'myriad-pro', 'helvetica neue', helvetica, arial, sans-serif;
 
 body {
-  // font-family: 'myriad-pro', 'helvetica neue', helvetica, arial, sans-serif;
+  font-family: $font-stack;
   margin: 0;
+  padding-top: 20px;
+  height: auto !important;
 }
 
 .ui.header, .ui.button {
@@ -76,4 +76,8 @@ code {
   background-color: snow;
   border-color: #E7BEBE;
   color: #D95C5C;
+}
+
+.ui.list .item a.black.button {
+  color: white !important;
 }

@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import config from '../config/environment';
 import AWS from '../utils/aws';
-const TEST = config.environment === 'test';
+const TEST = config.environment === 'test',
+      NFN = () => {};
 
 export default Ember.Component.extend({
 
@@ -12,7 +13,7 @@ export default Ember.Component.extend({
       let file = TEST ? event.detail.file : event.target.files[0];
       this.set('file', file);
       this.set('needsUpload', true);
-      this.sendAction('picked');
+      (this.attrs['on-selected'] || NFN)(file);
     };
 
     input.addEventListener('change', change, false);
@@ -22,12 +23,20 @@ export default Ember.Component.extend({
     
     this.set('input', input);
   },
+  
+  progressStyle: Ember.computed('progress', {
+    get() {
+      return Ember.String.htmlSafe(`width: ${this.get('progress')}%`);
+    }
+  }),
 
   actions: {
     replace: function () {
       this.set('file', null);
       this.set('needsUpload', false);
-      this.attrs['on-removed']();
+      this.set('uploaded', false);
+      this.set('initialFilename', null);
+      (this.attrs['on-selected'] || NFN)();
     },
     
     triggerClick: function () {
@@ -50,12 +59,16 @@ export default Ember.Component.extend({
       }, (err, data) => {
         this.set('isUploading', false);
         if (err) {
-          return this.attrs['on-failed']('failed', err);
+          return (this.attrs['on-failed'] || NFN)(err);
         }
         
         this.set('needsUpload', false);
         this.set('initialFilename', key);
-        this.attrs['on-uploaded']('uploaded', file);
+        this.set('uploaded', true);
+        (this.attrs['on-uploaded'] || NFN)(file, key);
+        Ember.run.later(this, () => {
+          this.set('file', null);
+        }, 600);
       }).on('httpUploadProgress', progress => {
         this.set('progress', progress.loaded / progress.total * 100);
       });

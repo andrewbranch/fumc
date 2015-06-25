@@ -2,6 +2,7 @@
 
 import DS from 'ember-data';
 import Ember from 'ember';
+import config from '../config/environment';
 const { Promise } = Ember.RSVP;
 
 export default DS.Model.extend({
@@ -15,13 +16,13 @@ export default DS.Model.extend({
   
   fileURL: Ember.computed('file', {
     get() {
-      return config.host + '/' + config.namespace + '/' + this.get('file');
+      return config.host + '/' + config.namespace + '/file/' + this.get('file');
     }
   }),
   
   formattedDate: Ember.computed('date', {
     get() {
-      moment(this.get('date')).format('MMMM D, YYYY');
+      return moment(this.get('date')).format('MMMM D, YYYY');
     }
   })
   
