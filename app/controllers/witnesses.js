@@ -1,9 +1,8 @@
 /* global moment */
 
 import Ember from 'ember';
-import PDFSController from './pdfs';
 
-export default PDFSController.extend({
+export default Ember.Controller.extend({
   
   actions: {
 

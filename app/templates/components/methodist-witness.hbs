@@ -1,0 +1,115 @@
+
+<div class="ui grid">
+  <div class="row">
+    <div class="one wide column">
+      {{#if witness.visible}}
+        <i class="unhide icon"></i>
+      {{/if}}
+    </div>
+    <div class="ten wide column">
+      <div class="header">{{model.formattedDateRange}}</div>
+      Volume {{model.volume}}, Issue {{model.issue}}
+    </div>
+    <div class="five wide right column">
+      <button class="ui small blue button" {{action "toggleEditing"}}>Edit</button>
+      {{#if model.file}}
+        <a href="{{witness.fileURL}}" class="ui small black button" target="_blank">View</a>
+      {{/if}}
+      <button class="ui small red button" {{action "remove" bubbles=false}}>Delete</button>
+    </div>
+  </div>
+
+  <div class="row slide editor">
+    <div class="four wide column preview-image-container">
+      {{#if previewPreview}}
+        <img class="preview-image" src="{{previewPreview}}">
+      {{else if model.preview}}
+        <img class="preview-image" src="{{model.previewURL}}">
+      {{else}}
+        <div class="preview-image placeholder">I wish I were<br>a cover image</div>
+      {{/if}}
+    </div>
+    <div class="twelve wide column">
+      <form class="ui fluid form">
+        <div class="field">
+          {{file-upload
+            initialFilename=model.file
+            on-selected=(action "fileSelected" "model.file")
+            on-uploading=(action "fileUploadStarted")
+            on-uploaded=(action "fileUploaded" "model.file")
+            on-selected=(action "fileSelected" "model.file")
+            button-text="Upload PDF"
+          }}
+        </div>
+        <div class="field">
+          {{file-upload
+            initialFilename=model.preview
+            on-selected=(action "fileSelected" "model.preview")
+            on-uploading=(action "fileUploadStarted" "model.preview")
+            on-uploaded=(action "fileUploaded" "model.preview")
+            on-selected=(action "fileSelected" "model.preview")
+            button-text="Upload preview image"
+          }}
+        </div>
+        <div class="two fields">
+          <div class="field">
+            <label>Volume</label>
+            <div class="ui left labeled input">
+              {{input value=model.volume}}
+              {{#if model.errors.volume}}
+                <div class="ui red pointing above label">{{model.errors.volume}}</div>
+              {{/if}}
+            </div>
+          </div>
+          <div class="field">
+            <label>Issue</label>
+            <div class="ui left labeled input">
+              {{input value=model.issue}}
+              {{#if model.errors.issue}}
+                <div class="ui red pointing above label">{{model.errors.issue}}</div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        <div class="two fields">
+          <div class="date field">
+            <label>From Date</label>
+            <div class="ui left labeled input">
+              {{date-field date=model.from}}
+              {{#if model.errors.from}}
+                <div class="ui red pointing above label">{{model.errors.from}}</div>
+              {{/if}}
+            </div>
+          </div>
+          <div class="date field">
+            <label>To Date</label>
+            <div class="ui left labeled input">
+              {{date-field date=model.to}}
+              {{#if model.errors.to}}
+                <div class="ui red pointing above label">{{model.errors.to}}</div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <div class="ui left labeled input">
+            {{textarea value=model.description}}
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui checkbox">
+            {{input type="checkbox" checked=model.visible}}
+            <label>Publish to app/website</label>
+          </div>
+        </div>
+        <div class="ui buttons field">
+          <button type="button" class="ui button" {{action "cancelEditing"}}>Cancel</button>
+          <div class="or"></div>
+          <button class="ui blue button {{unless shouldSave 'disabled'}}" {{action "save"}}>Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

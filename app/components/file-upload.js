@@ -51,6 +51,7 @@ export default Ember.Component.extend({
       let file = this.get('file'),
           key = file.name.replace(/(\..+?)$/, '_' + Date.now() + '$1');
       this.set('isUploading', true);
+      (this.attrs['on-uploading'] || NFN)();
       AWS.s3.putObject({
         Key: key,
         ContentType: file.type,
