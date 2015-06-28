@@ -47,4 +47,4 @@ export default PdfItem.extend({
       }
     }
   }
-})
+});

@@ -6,5 +6,5 @@ export default function fileAPI(property) {
     get() {
       return config.host + '/' + config.namespace + '/file/' + this.get(property);
     }
-  })
+  });
 }

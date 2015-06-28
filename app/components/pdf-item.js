@@ -1,5 +1,4 @@
 import Ember from 'ember';
-const { not } = Ember.computed;
 
 export default Ember.Component.extend({
   
@@ -27,7 +26,7 @@ export default Ember.Component.extend({
   
   actions: {
     toggleEditing: function() {
-      this.toggleProperty('editing')
+      this.toggleProperty('editing');
     },
     cancelEditing: function() {
       let model = this.get('model');
