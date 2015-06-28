@@ -5,10 +5,10 @@ export default PdfItem.extend({
     fileSelected: function(property, file) {
       let model = this.get('model');
       if (!file) {
-        return this.set(property, null);
-        if (property === 'preview') {
+        if (property === 'model.preview') {
           this.set('previewPreview', null);
         }
+        return this.set(property, null);
       }
       
       if (property === 'model.preview') {
