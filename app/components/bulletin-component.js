@@ -42,9 +42,7 @@ export default Ember.Component.extend({
     save: function() {
       let model = this.get('model');
       model.save().then(() => {
-        Ember.run.later(() => {
-          this.set('editing', false);
-        }, 600);
+        this.set('editing', false);
       });
     },
     fileUploaded: function(property, file, key) {
