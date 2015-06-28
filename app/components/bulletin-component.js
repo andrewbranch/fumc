@@ -9,14 +9,14 @@ export default Ember.Component.extend({
   init: function() {
     this._super();
     this.set('numberOfFileUploading', 0);
-  },
-  
-  didInsertElement: function() {
-    this.$('.ui.checkbox').checkbox();
     // Start editing right away!
     if (this.get('model.currentState.stateName') === 'root.loaded.created.uncommitted') {
       this.set('editing', true);
     }
+  },
+  
+  didInsertElement: function() {
+    this.$('.ui.checkbox').checkbox();
   },
   
   isUploading: equal('numberOfFileUploading', 0),

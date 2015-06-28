@@ -28,7 +28,7 @@ export default Ember.TextField.extend({
       format: 'MM/DD/YYYY'
     });
     this.set('picker', picker);
-    this.updateValue();
+    Ember.run.scheduleOnce('afterRender', this, 'updateValue');
   },
 
   willDestroyElement: function (){
