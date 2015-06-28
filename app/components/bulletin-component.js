@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { and, not, equal } = Ember.computed;
+const { not } = Ember.computed;
 
 export default Ember.Component.extend({
   
@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   
   init: function() {
     this._super();
-    this.set('numberofFilesUploading', 0);
+    this.set('numberOfFilesUploading', 0);
     // Start editing right away!
     if (this.get('model.currentState.stateName') === 'root.loaded.created.uncommitted') {
       this.set('editing', true);
@@ -19,10 +19,9 @@ export default Ember.Component.extend({
     this.$('.ui.checkbox').checkbox();
   },
   
-  isUploading: equal('numberofFilesUploading', 0),
-  shouldSave: Ember.computed('isUploading', 'model.isDirty', {
+  shouldSave: Ember.computed('numberOfFilesUploading', 'model.hasDirtyAttributes', {
     get() {
-      return !this.get('isUploading') && this.get('model.isDirty');
+      return this.get('numberOfFilesUploading') === 0 && this.get('model.hasDirtyAttributes');
     }
   }),
   
@@ -47,10 +46,10 @@ export default Ember.Component.extend({
     },
     fileUploaded: function(property, file, key) {
       this.set(property, key);
-      this.decrementProperty('numberofFilesUploading');
+      this.decrementProperty('numberOfFilesUploading');
     },
     fileUploadStarted: function() {
-      this.incrementProperty('numberofFilesUploading');
+      this.incrementProperty('numberOfFilesUploading');
     },
     fileSelected: function(property, file) {
       let model = this.get('model');
