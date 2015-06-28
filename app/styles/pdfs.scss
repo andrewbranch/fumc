@@ -1,9 +1,8 @@
 .pdf-item {
-  
+  padding: .5em !important;
   .editing.row {
     padding-top: 0;
     margin: 10px 0;
-    cursor: default;
   }
 
   &.item.editing, .bulletin.item.editing:active {
@@ -13,6 +12,15 @@
 
   &.item .unhide.icon {
     line-height: 200%;
+  }
+  
+  &:not(.editing) .editor {
+    display: none;
+  }
+  
+  .preview-image.placeholder {
+    color: #777;
+    text-align: center;
   }
 }
 
@@ -31,19 +39,4 @@
 
 .pdf {
   width: 100%;
-}
-
-.pdf-modal {
-  margin-top: 0 !important;
-  top: 0;
-  height: 100%;
-  
-  .content {
-    height: 90%;
-  }
-
-  object {
-    height: 100%;
-    top: 0;
-  }
 }

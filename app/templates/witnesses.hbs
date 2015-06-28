@@ -2,10 +2,9 @@
 
 <button class="ui blue button" {{action "newWitness"}}>New Witness</button>
 
-<div class="ui selection link divided list">
-  {{#each witness in arrangedContent itemController="witness"}}
-    {{view "witness"}}
+<div class="ui link divided list">
+  {{#each model as |witness|}}
+    {{methodist-witness model=witness}}
   {{/each}}
 </div>
 
-{{#pdf-modal url=modalURL visible=showingModal close="hideModal"}}{{/pdf-modal}}

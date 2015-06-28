@@ -14,7 +14,7 @@ module.exports = function(app) {
           "file": null,
           "id": ++id,
           "type": "bulletins",
-          "links": {"self":"/api/v3/bulletins/" + id }
+          "links": {"self":"/v3/bulletins/" + id }
         }
     };
   }

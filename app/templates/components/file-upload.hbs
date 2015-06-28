@@ -1,11 +1,27 @@
-<div {{bind-attr class=":file-label currentFile::hidden"}}>
-  <div class="ui black horizontal label">
-    <i class="file icon"></i> {{currentFile}}
+{{#if initialFilename}}
+  <div class="file-label">
+    <div class="ui black horizontal label">
+      <i class="file icon"></i> {{initialFilename}}
+    </div>
+    <a href="#" {{action "replace"}}>Replace</a>
   </div>
-  <a href="#" {{action "replace"}}>Replace</a>
-</div>
-
-<div {{bind-attr class="currentFile:hidden"}}>
-  <input type="file" class="hidden">
-  <button class="ui small black button" {{action "triggerClick"}}>Upload file</button>
-</div>
+{{else if file}}
+  <div class="file-label">
+    <div class="ui black horizontal label">
+      <i class="file icon"></i> {{file.name}}
+    </div>
+    {{#unless isUploading}}
+      <a href="#" {{action "upload"}}>Upload</a>
+    {{/unless}}
+  </div>
+  {{#if isUploading}}
+    <div class="ui progress {{if uploaded 'success'}}">
+      <div class="bar" style={{progressStyle}}></div>
+    </div>
+  {{/if}}
+{{else}}
+  <div>
+    <button class="ui small black button" {{action "triggerClick"}}>{{button-text}}</button>
+  </div>
+{{/if}}
+<input type="file" class="hidden">

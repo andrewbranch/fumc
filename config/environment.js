@@ -16,7 +16,7 @@ module.exports = function (environment) {
       'script-src': "'self' 'unsafe-inline' https://api-cdn.amazon.com use.typekit.net",
       'font-src': "'self' data: use.typekit.net https://fonts.gstatic.com",
       'connect-src': "'self' https://sts.amazonaws.com https://fumcappfiles.s3.amazonaws.com https://api.fumcpensacola.com",
-      'img-src': "'self' data: p.typekit.net about: https://fumcappfiles.s3.amazonaws.com",
+      'img-src': "'self' data: p.typekit.net about: https://fumcappfiles.s3.amazonaws.com https://s3.amazonaws.com/fumcappfiles",
       'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com use.typekit.net",
       'media-src': "'self' https://fumcappfiles.s3.amazonaws.com",
       'object-src': "'self' https://fumcappfiles.s3.amazonaws.com"
@@ -46,6 +46,7 @@ module.exports = function (environment) {
     ENV.proxy = 'http://localhost:3000';
     ENV.host = ENV.proxy;
     ENV.contentSecurityPolicy['connect-src'] += (' ' + ENV.proxy);
+    ENV.contentSecurityPolicy['img-src'] += (' ' + ENV.proxy);
   }
 
   if (environment === 'test') {
