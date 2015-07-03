@@ -7,7 +7,7 @@ import fileAPI from '../utils/file-api';
 export default DS.Model.extend({
   date: DS.attr('date'),
   service: DS.attr('string'),
-  lectionary: DS.attr('string'),
+  description: DS.attr('string'),
   liturgicalDay: DS.attr('string'),
   visible: DS.attr('boolean'),
   file: DS.attr('string'),
