@@ -19,15 +19,5 @@ install:
 script:
   - npm test
   
-before_deploy:
-  - "ember build --environment production"
-
-deploy:
-  provider: s3
-  access_key_id: "$AWS_ACCESS_KEY"
-  secret_access_key: "$AWS_SECRET_KEY"
-  bucket: "fumc-mission-control"
-  skip_cleanup: true
-  local_dir: dist
-  on:
-    tags: true
+after_success:
+  - test $TRAVIS_TAG && test $TRAVIS_BRANCH == "master" && ember deploy --environment production
