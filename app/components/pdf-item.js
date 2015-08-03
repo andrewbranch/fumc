@@ -49,6 +49,11 @@ export default Ember.Component.extend({
     },
     fileUploadStarted: function() {
       this.incrementProperty('numberOfFilesUploading');
+    },
+    remove: function() {
+      if (confirm('Permanently delete bulletin?')) {
+        this.get('model').destroyRecord();
+      }
     }
   }
 });

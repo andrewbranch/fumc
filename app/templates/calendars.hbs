@@ -8,7 +8,7 @@
   <div class="space-below">
     <h2 class="ui header">The Easy Way</h2>
     <div class="space-below">
-      <a href="webcal://fumc.herokuapp.com/api/calendars/all.ics" class="ui blue button">Subscribe to Combined Calendar</a>
+      <a href="webcal://api.fumcpensacola.com/v3/ical/all.ics" class="ui blue button">Subscribe to Combined Calendar</a>
     </div>
     <div class="ui action input">
       {{input value=calendarName id="calendar-name" placeholder="Type name of calendar..."}}
@@ -19,9 +19,9 @@
   <div class="ui secondary segment">
     <h2 class="ui header">Documentation</h2>
     <h4 class="ui header">Named Calendars</h4>
-    <p>Any individual calendar, even ones that are added in the future, can be accessed by name. To do so, remove any spaces and special characters from the calendar name, and insert it into the URL <code>webcal://fumc.herokuapp.com/api/calendars/CALENDAR_NAME.ics</code>. For example, the URL for the &ldquo;MCA &amp; Children's Ministry&rdquo; calendar would be</p>
-    <div class="ui segment"><code>webcal://fumc.herokuapp.com/api/calendars/MCAChildrensMinistry.ics</code></div>
-    <p>Capitalization of the calendar name is ignored.</p>
+    <p>Any individual calendar, even ones that are added in the future, can be accessed by name. To do so, any spaces and special characters in the calendar name must be <a href="https://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a>, and then inserted into the URL <code>webcal://api.fumcpensacola.com/v3/ical/CALENDAR_NAME.ics</code>, where <code>CALENDAR_NAME</code> is the URL encoded calendar name. For example, the URL for the &ldquo;MCA &amp; Children's Ministry&rdquo; calendar would be</p>
+    <div class="ui segment"><code>webcal://api.fumcpensacola.com/v3/ical/MCA%20%26%20Children's%20Minsitry.ics</code></div>
+    <p>The calendar name is case-sensitive and must match exactly.</p>
 
     <h4 class="ui header">All Calendars Combined</h4>
     <p>You can alternatively subscribe to one calendar that combines published events from all calendars. Just replace the name of the calendar in the URL above with <code>all</code>.</p>

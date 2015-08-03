@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   calendarURL: function () {
-    return 'webcal://fumc.herokuapp.com/api/calendars/' + (this.get('calendarName') || '').replace(/[^A-Za-z0-9]/g, '') + '.ics';
+    return Ember.String.htmlSafe('webcal://api.fumcpensacola.com/v3/ical/' + encodeURIComponent(this.get('calendarName') || '') + '.ics');
   }.property('calendarName')
 
 });
