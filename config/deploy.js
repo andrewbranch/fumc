@@ -1,3 +1,5 @@
+try{require('dotenv').load(require('path').resolve(__dirname, '../.env'));}catch(_){}
+
 module.exports = {
    production: {
     store: {
@@ -11,8 +13,7 @@ module.exports = {
     assets: {
       accessKeyId: process.env.AWS_ACCESS_KEY,
       secretAccessKey: process.env.AWS_SECRET_KEY,
-      bucket: 'fumc-mission-control',
-      exclude: ['index.html']
+      bucket: 'fumc-mission-control'
     }
   }
 };
