@@ -8,9 +8,9 @@ export default Ember.Route.extend({
       Ember.$.post(config.host + '/' + config.namespace + '/authenticate', { access_token: token }).then(function (response) {
         if (response.success) {
 
-          var loginController = this.controllerFor('login'),
-              attemptedTransition = loginController.get('attemptedTransition');
-          loginController.setProperties({
+          var applicationController = this.controllerFor('application'),
+              attemptedTransition = applicationController.get('attemptedTransition');
+          applicationController.setProperties({
             name: response.name,
             email: response.email,
             token: response.token
@@ -18,7 +18,7 @@ export default Ember.Route.extend({
 
           if (attemptedTransition) {
             attemptedTransition.retry();
-            loginController.set('attemptedTransition', null);
+            applicationController.set('attemptedTransition', null);
           } else {
             this.transitionTo('index');
           }

@@ -3,7 +3,7 @@
 import Ember from 'ember';
 import config from '../config/environment';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   
   tokenEnvironment: 'ZEROPUSH_PROD_TOKEN',
 
@@ -12,13 +12,13 @@ export default Ember.ObjectController.extend({
   },
 
   expirationDateIsValid: function () {
-    var exp = this.get('expirationDate');
+    var exp = this.get('model.expirationDate');
     return exp && moment(exp).isValid() && exp > Date.now();
-  }.property('expirationDate'),
+  }.property('model.expirationDate'),
 
   messageIsValid: function () {
-    return (this.get('message') || '').trim().length;
-  }.property('message'),
+    return (this.get('model.message') || '').trim().length;
+  }.property('model.message'),
 
   urlIsValid: true,
   isValid: Ember.computed.and('expirationDateIsValid', 'messageIsValid', 'urlIsValid'),
@@ -32,8 +32,8 @@ export default Ember.ObjectController.extend({
       var self = this;
       this.set('loading', true);
       if (this.get('isValid') && confirm('This will be sent immediately to every person who has downloaded the app and accepted push notifications, and cannot be undone.')) {
-        this.set('sendDate', new Date());
-        this.set('test', test);
+        this.set('model.sendDate', new Date());
+        this.set('model.test', test);
         var model = this.get('model');
         model.save().then(function () {
           Ember.$.ajax({
