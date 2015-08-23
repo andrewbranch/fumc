@@ -8,10 +8,9 @@ var Router = Ember.Router.extend({
 Router.map(function() {
   this.route('login');
   this.route('authenticate');
-  this.resource('bulletins');
-  this.resource('witnesses');
-  this.resource('featured');
-  this.resource('notifications');
+  this.route('bulletins');
+  this.route('witnesses');
+  this.route('notifications');
   this.route('calendars');
   this.route('unauthorized');
 
