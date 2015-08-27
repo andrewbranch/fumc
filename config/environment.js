@@ -5,7 +5,7 @@ module.exports = function (environment) {
     modulePrefix: 'mission-control',
     environment: environment,
     baseURL: '/',
-    locationType: 'hash',
+    locationType: 'auto',
     proxy: '',
     host: 'https://api.fumcpensacola.com',
     namespace: 'v3',

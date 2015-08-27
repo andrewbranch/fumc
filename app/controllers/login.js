@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   actions: {
     login: function () {
       var options = { scope: 'profile' };
-      amazon.Login.authorize(options, '/#/authenticate');
+      amazon.Login.authorize(options, '/authenticate');
     }
   }
 
