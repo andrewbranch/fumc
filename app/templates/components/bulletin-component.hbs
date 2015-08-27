@@ -1,12 +1,7 @@
 <div class="ui grid">
   <div class="row">
-    <div class="one wide column">
-      {{#if model.visible}}
-        <i class="unhide icon"></i>
-      {{/if}}
-    </div>
     <div class="ten wide column">
-      <div class="header">{{model.formattedDate}}</div>
+      <div class="ui header">{{formattedDate}}</div>
       {{model.service}}
     </div>
     <div class="five wide right column">
@@ -17,8 +12,7 @@
       <button class="ui small red button" {{action 'remove'}}>Delete</button>
     </div>
   </div>
-
-  <div class="row slide editor">
+  <div class="row editor">
     <div class="four wide column preview-image-container">
       {{#if previewPreview}}
         <img class="preview-image" src="{{previewPreview}}">
@@ -84,10 +78,9 @@
             <label>Publish to app/website</label>
           </div>
         </div>
-        <div class="ui buttons field">
-          <button type="button" class="ui button" {{action "cancelEditing"}}>Cancel</button>
-          <div class="or"></div>
-          <button class="save ui blue button {{unless shouldSave 'disabled'}}" {{action "save"}}>Save</button>
+        <div class="field">
+          <button type="button" class="ui black button" {{action "cancelEditing"}}>Cancel</button>
+          <button class="save ui blue button {{unless model.hasChanges 'disabled'}}" {{action "save"}}>Save</button>
         </div>
       </form>
     </div>

@@ -1,6 +1,12 @@
 import PdfItem from './pdf-item';
 
 export default PdfItem.extend({
+  formattedDate: Ember.computed('model.date', {
+    get() {
+      return moment(this.get('model.date')).format('MMMM D, YYYY');
+    }
+  }),
+  
   actions: {
     fileSelected: function(property, file) {
       let model = this.get('model');
@@ -31,7 +37,7 @@ export default PdfItem.extend({
         );
         
         // Only set the date if it hasn't already been set manually
-        if (model.changedAttributes().date) {
+        if (model.get('date') !== model.get('content.date')) {
           if (!isNaN(date.getDate()) && date.getFullYear() - new Date().getFullYear() <= 1) { // Sanity check
             this.set('date', date);
           }

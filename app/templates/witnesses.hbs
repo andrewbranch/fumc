@@ -2,9 +2,13 @@
 
 <button class="ui blue button" {{action "newWitness"}}>New Witness</button>
 
-<div class="ui link divided list">
-  {{#each model as |witness|}}
-    {{methodist-witness model=witness}}
-  {{/each}}
+<div class="ui link divided list pdf-list">
+  {{#liquid-bind witnesses as |w|}}
+    {{#each w as |witness|}}
+      <div data-client-id={{witness._clientId}}>
+        {{methodist-witness model=witness}}
+      </div>
+    {{/each}}
+  {{/liquid-bind}}
 </div>
 

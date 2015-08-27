@@ -1,7 +1,6 @@
-
 <div class="ui one column page grid">
   <div class="column">
-    <div class="ui teal inverted menu">
+    <div class="ui stackable menu">
       {{#link-to 'index' class='item'}}<i class="home icon"></i> Home{{/link-to}}
       {{#link-to 'bulletins' class='item'}}<i class="file icon"></i> Bulletins{{/link-to}}
       {{#link-to 'witnesses' class='item'}}<i class="mail icon"></i> Witnesses{{/link-to}}
@@ -23,7 +22,7 @@
   </div>
 </div>
 
-<div class="ui one column page grid">
+<div class="ui one column page grid" id="main">
   <div class="column">
   {{outlet}}
   </div>

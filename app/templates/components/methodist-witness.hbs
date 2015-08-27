@@ -1,13 +1,8 @@
 
 <div class="ui grid">
   <div class="row">
-    <div class="one wide column">
-      {{#if model.visible}}
-        <i class="unhide icon"></i>
-      {{/if}}
-    </div>
-    <div class="ten wide column">
-      <div class="header">{{model.formattedDateRange}}</div>
+    <div class="eleven wide column">
+      <div class="ui header">{{formattedDateRange}}</div>
       Volume {{model.volume}}, Issue {{model.issue}}
     </div>
     <div class="five wide right column">
@@ -103,10 +98,9 @@
             <label>Publish to app/website</label>
           </div>
         </div>
-        <div class="ui buttons field">
-          <button type="button" class="ui button" {{action "cancelEditing"}}>Cancel</button>
-          <div class="or"></div>
-          <button class="ui blue button {{unless shouldSave 'disabled'}}" {{action "save"}}>Save</button>
+        <div class="field">
+          <button type="button" class="ui black button" {{action "cancelEditing"}}>Cancel</button>
+          <button class="ui blue button {{unless model.hasChanges 'disabled'}}" {{action "save"}}>Save</button>
         </div>
       </form>
     </div>
