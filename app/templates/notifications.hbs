@@ -1,7 +1,7 @@
 <div class="narrow">
   <h1 class="ui header">Send Push Notification</h1>
 
-  <form {{bind-attr class=":ui :form :segment loading"}}>
+  <form class="ui form {{if loading 'loading'}}">
     <div class="field">
       <label>Expiration Date</label>
       {{date-field date=model.expirationDate}}
@@ -23,9 +23,9 @@
         {{ui-radio name="environment" current=tokenEnvironment value="ZEROPUSH_DEV_TOKEN" label="Development"}}
       </div>
     </div>
-    <div>
-      <button type="button" {{bind-attr class=":ui :blue :button isValid::disabled"}} {{action "test"}}>Test</button>
-      <button type="button" {{bind-attr class=":ui :red :button isValid::disabled"}} {{action "send"}}>Send</button>
+    <div class="space-above">
+      <button type="button" class="ui blue button {{unless isValid 'disabled'}}" {{action "test"}}>Test</button>
+      <button type="button" class="ui red button {{unless isValid 'disabled'}}" {{action "send"}}>Send</button>
     </div>
   </form>
 </div>

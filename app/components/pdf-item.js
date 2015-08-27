@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import modelIsNew from '../utils/model-is-new';
 
 export default Ember.Component.extend({
   
@@ -29,17 +30,16 @@ export default Ember.Component.extend({
       this.toggleProperty('editing');
     },
     cancelEditing: function() {
-      let model = this.get('model');
-      if (model.get('currentState.stateName') === 'root.loaded.created.uncommitted') {
-        model.destroyRecord();
+      if (modelIsNew(this.get('model.content'))) {
+        this.get('model.content').destroyRecord();
       } else {
-        model.rollback();
-        this.set('editing', false);
+        this.get('model').discardBufferedChanges();
       }
+      this.set('editing', false);
     },
     save: function() {
-      let model = this.get('model');
-      model.save().then(() => {
+      this.get('model').applyBufferedChanges();
+      this.get('model.content').save().then(() => {
         this.set('editing', false);
       });
     },
@@ -51,8 +51,8 @@ export default Ember.Component.extend({
       this.incrementProperty('numberOfFilesUploading');
     },
     remove: function() {
-      if (confirm('Permanently delete bulletin?')) {
-        this.get('model').destroyRecord();
+      if (modelIsNew(this.get('model.content')) || confirm('Permanently delete?')) {
+        this.get('model.content').destroyRecord();
       }
     }
   }

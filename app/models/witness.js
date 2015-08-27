@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import UUID from 'npm:node-uuid';
 import fileAPI from '../utils/file-api';
 
 export default DS.Model.extend({
@@ -8,12 +9,17 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   volume: DS.attr('number'),
   issue: DS.attr('number'),
-  visible: DS.attr('boolean'),
+  visible: DS.attr('boolean', { defaultValue: true }),
   file: DS.attr('string'),
   preview: DS.attr('string'),
   
   fileURL: fileAPI('file'),
   previewURL: fileAPI('preview'),
+  
+  init() {
+    this.set('_clientId', UUID.v1());
+    this._super();
+  },
   
   formattedDateRange: Ember.computed('from', 'to', {
     get() {

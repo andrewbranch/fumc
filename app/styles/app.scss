@@ -2,17 +2,92 @@
 @import './featured.scss';
 @import './calendars.scss';
 
+$serif-font-stack: skolar, georgia, serif;
 $font-stack: 'myriad-pro', 'helvetica neue', helvetica, arial, sans-serif;
+$blue: #387d96;
+$red: #a63751;
 
 body {
-  font-family: $font-stack;
+  font-family: $serif-font-stack;
   margin: 0;
   padding-top: 20px;
   height: auto !important;
+  background-color: white;
+  font-size: 16px;
+  transition: background-color .3s linear;
+  &.index {
+    background: url('/assets/images/earth-from-space.jpg');
+    background-color: black;
+    background-size: cover;
+    &, .ui.menu .item, h1 {
+      color: white !important;
+    }
+    h1 {
+      font-size: 70px !important;
+    }
+  }
+}
+
+.ui.menu {
+  background-color: transparent;
+  box-shadow: none;
+  font-size: 18px;
+  .active.item {
+    background-color: transparent;
+    box-shadow: 0em -2px 0em inset;
+  }
+  .item {
+    border-radius: 0 !important;
+  }
+  a.item:hover {
+    background: transparent !important;
+    i {
+      opacity: 1;
+    }
+  }
+  .item:before {
+    display: none;
+  }
 }
 
 .ui.header, .ui.button {
-  font-family: $font-stack;
+  font-family: $serif-font-stack;
+  font-weight: normal;
+}
+.ui.button {
+  letter-spacing: .4px;
+  &.blue {
+    border: 2px solid $blue;
+    background-color: transparent;
+    color: $blue;
+    &:hover {
+      background-color: $blue;
+    }
+  }
+  &.red {
+    border: 2px solid $red;
+    background-color: transparent;
+    color: $red;
+    &:hover {
+      background-color: $red;
+    }
+  }
+  &.black {
+    border: 2px solid black;
+    background-color: transparent;
+    color: black;
+    &:hover {
+      background-color: black;
+      color: white !important;
+    }
+  }
+}
+.ui.list .item a.ui.black.button:hover {
+  color: white !important;
+}
+
+#main {
+  margin-top: 40px;
 }
 
 a {
@@ -76,8 +151,4 @@ code {
   background-color: snow;
   border-color: #E7BEBE;
   color: #D95C5C;
-}
-
-.ui.list .item a.black.button {
-  color: white !important;
 }
