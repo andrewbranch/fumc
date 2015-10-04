@@ -9,8 +9,7 @@ export default Ember.Route.extend({
   },
 
   redirectToLogin: function (transition) {
-    var loginController = this.controllerFor('login');
-    loginController.set('attemptedTransition', transition);
+    localStorage.setItem('missionControlTransition', transition.intent.name);
     this.transitionTo('login');
   },
 

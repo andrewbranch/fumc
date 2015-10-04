@@ -9,7 +9,7 @@ export default Ember.Route.extend({
         if (response.success) {
 
           var applicationController = this.controllerFor('application'),
-              attemptedTransition = applicationController.get('attemptedTransition');
+              attemptedTransition = localStorage.getItem('missionControlTransition');
           applicationController.setProperties({
             name: response.name,
             email: response.email,
@@ -17,8 +17,8 @@ export default Ember.Route.extend({
           });
 
           if (attemptedTransition) {
-            attemptedTransition.retry();
-            applicationController.set('attemptedTransition', null);
+            this.transitionTo(attemptedTransition);
+            localStorage.removeItem('missionControlTransition');
           } else {
             this.transitionTo('index');
           }
