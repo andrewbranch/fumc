@@ -16,10 +16,14 @@ module.exports = function (environment) {
       'script-src': "'self' 'unsafe-inline' https://api-cdn.amazon.com use.typekit.net",
       'font-src': "'self' data: use.typekit.net https://fonts.gstatic.com",
       'connect-src': "'self' https://sts.amazonaws.com https://fumcappfiles.s3.amazonaws.com https://api.fumcpensacola.com",
-      'img-src': "'self' data: p.typekit.net about: https://fumcappfiles.s3.amazonaws.com https://s3.amazonaws.com/fumcappfiles https://api.fumcpensacola.com",
+      'img-src': "'self' data: p.typekit.net about: https://fumcappfiles.s3.amazonaws.com https://s3.amazonaws.com/fumcappfiles https://api.fumcpensacola.com https://i.vimeocdn.com",
       'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com use.typekit.net",
       'media-src': "'self' https://fumcappfiles.s3.amazonaws.com",
       'object-src': "'self' https://fumcappfiles.s3.amazonaws.com"
+    },
+    
+    moment: {
+      outputFormat: 'l'
     },
 
     contentSecurityPolicyHeader: 'Content-Security-Policy',
