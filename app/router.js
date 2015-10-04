@@ -17,6 +17,7 @@ Router.map(function() {
   this.route('error404', {
     path: '*:'
   });
+  this.route('videos');
 });
 
 export default Router;

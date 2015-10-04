@@ -1,11 +1,13 @@
-@import './pdfs.scss';
-@import './featured.scss';
-@import './calendars.scss';
+@import 'pdfs';
+@import 'featured';
+@import 'calendars';
+@import 'videos-editor';
 
 $serif-font-stack: skolar, georgia, serif;
 $font-stack: 'myriad-pro', 'helvetica neue', helvetica, arial, sans-serif;
 $blue: #387d96;
 $red: #a63751;
+$grayish: #79858c;
 
 body {
   font-family: $serif-font-stack;
@@ -26,6 +28,14 @@ body {
       font-size: 70px !important;
     }
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $serif-font-stack;
+}
+h2 {
+  font-size: 20px;
+  color: $grayish;
 }
 
 .ui.menu {
@@ -136,6 +146,10 @@ code {
 
 .space-above {
   margin-top: 25px;
+}
+
+.ui.checkbox {
+  line-height: inherit;
 }
 
 .ui.progress .bar {

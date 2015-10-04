@@ -1,0 +1,19 @@
+{{#each sortedAlbums as |album|}}
+  <h2>{{album.name}}</h2>
+  <div>
+    {{ui-checkbox checked=album.visible label="Visible" action=(action "save" album)}}<br>
+    {{ui-checkbox checked=album.featured label="Featured" action=(action "save" album)}}
+  </div>
+  <ul>
+    {{#each album.videosByDateDescending as |video|}}
+      <li>
+        <a href="{{video.link}}"><img src="{{video.smallThumbnailURL}}"></a>
+        <div>
+          <h3>{{moment-format video.date}}</h3>
+          <a href="{{video.link}}">{{video.name}}</a><br>
+          {{ui-checkbox checked=video.visible label="Visible" action=(action "save" video)}}
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+{{/each}}
